@@ -85,10 +85,12 @@ def tensorflow_installed() -> bool:
 
 
 def package_version(name: str) -> str:
-    try:
-        return metadata.version(name)
-    except metadata.PackageNotFoundError:
-        return "not installed"
+    for pkg in (name, f"{name}-cpu", f"{name}-headless"):
+        try:
+            return metadata.version(pkg)
+        except metadata.PackageNotFoundError:
+            continue
+    return "not installed"
 
 
 # --------------------------------------------------------------------------- #
