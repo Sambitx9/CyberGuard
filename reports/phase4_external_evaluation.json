@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-10-07T03:11:08.804485",
+  "status": "BLOCKED",
+  "reason": "External dataset not provided. Metrics not fabricated.",
+  "accuracy": null,
+  "recall": null,
+  "f1": null,
+  "roc_auc": null,
+  "decision_gate": "PRELIMINARY"
+}

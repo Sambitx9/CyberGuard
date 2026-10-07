@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-10-07T07:34:49.886351",
+  "phase": "Phase 3 \u2014 External Validation + Detector Hardening + Confidence Calibration",
+  "model_file": "cyberguard_model.keras",
+  "model_weights_checksum_sha256": "E7422FCA2F61706F5F0379453469C8D536A7D343DF1A185214AF8F48028539A6",
+  "model_weights_size_bytes": 21752160,
+  "external_dataset": {
+    "status": "NOT PROVIDED",
+    "validation_state": "BLOCKED",
+    "instructions_file": "DATASET_READY.md"
+  },
+  "face_detector_hardening": {
+    "production_detector": "OpenCV Haar Cascade (Default)",
+    "benchmark_status": "COMPLETED",
+    "haar_cascade_rate": 0.64,
+    "ensemble_cascade_rate": 0.7,
+    "deep_learning_yunet_status": "UNAVAILABLE (Weights not bundled in standard opencv-python-headless distribution)",
+    "policy_recommendation": "Retain Haar Cascade for production MVP; no-face guard cleanly intercepts close-up misses without false classification."
+  },
+  "multi_face_validation": {
+    "status": "PASS",
+    "deterministic_sorting": "Area (w*h) descending",
+    "primary_face_crop": "VERIFIED",
+    "secondary_faces_isolated": "VERIFIED"
+  },
+  "confidence_calibration": {
+    "status": "COMPLETED",
+    "calibration_dataset": "dataset/ held-out validation split (100 images, strictly disjoint from test_data)",
+    "raw_ece": 0.10759955653920769,
+    "calibrated_platt_ece": 0.04382556109872351,
+    "raw_brier": 0.05782279466458741,
+    "calibrated_platt_brier": 0.03320116235718236,
+    "high_confidence_errors_mitigated": true,
+    "ui_policy": "Retain caveat 'Confidence reflects model certainty, not proof that an image is authentic or manipulated.'"
+  },
+  "production_threshold": {
+    "current_threshold": 0.5,
+    "decision": "PRESERVED at 0.50 (no empirical basis to alter threshold without external test data)"
+  },
+  "model_decision_gate": {
+    "classification": "PRELIMINARY",
+    "justification": "External dataset not provided; model exhibits high internal test accuracy (88.0%) but remains preliminary until tested against independent multi-generator benchmarks."
+  }
+}

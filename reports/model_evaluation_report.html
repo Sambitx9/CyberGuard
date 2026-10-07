@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CyberGuard Model Evaluation Report</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #0a0e17; color: #e5e7eb; max-width: 1040px; margin: 32px auto; padding: 0 24px; line-height: 1.6; }
+h1 { color: #00e5ff; margin-bottom: 4px; }
+h2 { color: #38bdf8; border-bottom: 1px solid #1f2937; padding-bottom: 8px; margin-top: 36px; }
+h3 { color: #94a3b8; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 4px; font-weight: 600; font-size: 0.85em; }
+.badge-warning { background: #854d0e; color: #fef08a; }
+.badge-prelim { background: #1e3a8a; color: #93c5fd; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 20px 0; }
+.card { background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 16px; }
+.card-title { font-size: 0.8em; color: #94a3b8; text-transform: uppercase; }
+.card-val { font-size: 1.8em; font-weight: 700; color: #00e5ff; margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #1f2937; }
+th { background: #111827; color: #94a3b8; font-weight: 600; }
+.callout { background: #111827; border-left: 4px solid #f59e0b; padding: 14px 18px; border-radius: 4px; margin: 20px 0; }
+.callout-info { border-left-color: #00e5ff; }
+.img-container { margin: 20px 0; text-align: center; }
+.img-container img { max-width: 100%; border-radius: 8px; border: 1px solid #1f2937; }
+</style>
+</head>
+<body>
+
+<h1>CYBERGUARD &mdash; MODEL EVALUATION REPORT</h1>
+<div style="color: #94a3b8; margin-bottom: 24px;">Generated on 2026-10-07 07:09:48 | Status: <span class="badge badge-prelim">PRELIMINARY</span> <span class="badge badge-warning">INTEGRITY WARNING</span></div>
+
+<div class="callout callout-info">
+<strong>Executive Summary:</strong> The existing CyberGuard MobileNetV2 deepfake classifier achieves <strong>88.0% accuracy</strong> and <strong>ROC-AUC 0.959</strong> on 100 unseen test faces. Performance is asymmetric: authentic faces achieve <strong>100.0% recall</strong> (0 false positives), while synthetic/fake faces achieve <strong>76.0% recall</strong> (12 false negatives). Results are preliminary due to evaluation sample size.
+</div>
+
+<h2>1. Dataset Composition & Integrity</h2>
+<div class="card-grid">
+  <div class="card"><div class="card-title">Total Test Images</div><div class="card-val">100</div></div>
+  <div class="card"><div class="card-title">Real Faces</div><div class="card-val">50</div></div>
+  <div class="card"><div class="card-title">Fake Faces</div><div class="card-val">50</div></div>
+  <div class="card"><div class="card-title">Data Leakage</div><div class="card-val" style="color:#f59e0b;">2 exact</div></div>
+</div>
+<div class="callout">
+<strong>Data Leakage Note:</strong> 2 images in the test set (<code>fake_test_0004.jpg</code>, <code>fake_test_0009.jpg</code>) are exact byte duplicates of training samples due to overlap in the upstream HuggingFace dataset split. 16 near-duplicates were also detected.
+</div>
+
+<h2>2. Core Performance Metrics</h2>
+<table>
+  <tr><th>Metric</th><th>Score</th><th>Description</th></tr>
+  <tr><td>Accuracy</td><td><strong>88.00%</strong></td><td>Overall correct predictions (88/100)</td></tr>
+  <tr><td>Precision (FAKE)</td><td><strong>100.00%</strong></td><td>TP / (TP + FP) - Confidence that flagged deepfakes are truly fake</td></tr>
+  <tr><td>Recall / Sensitivity (FAKE)</td><td><strong>76.00%</strong></td><td>TP / (TP + FN) - Detection rate of fake images</td></tr>
+  <tr><td>Specificity (REAL)</td><td><strong>100.00%</strong></td><td>TN / (TN + FP) - True authentic retention rate</td></tr>
+  <tr><td>False Positive Rate</td><td><strong>0.00%</strong></td><td>FP / (FP + TN) - False alarm rate on authentic faces</td></tr>
+  <tr><td>False Negative Rate</td><td><strong>24.00%</strong></td><td>FN / (FN + TP) - Missed deepfake rate</td></tr>
+  <tr><td>F1-Score</td><td><strong>86.36%</strong></td><td>Harmonic mean of precision and recall</td></tr>
+  <tr><td>Balanced Accuracy</td><td><strong>88.00%</strong></td><td>Mean of recall and specificity</td></tr>
+  <tr><td>ROC-AUC</td><td><strong>0.9588</strong></td><td>Area under Receiver Operating Characteristic curve</td></tr>
+  <tr><td>PR-AUC</td><td><strong>0.9686</strong></td><td>Area under Precision-Recall curve</td></tr>
+</table>
+
+<h2>3. Confusion Matrix</h2>
+<table>
+  <tr><th></th><th>Predicted REAL (0)</th><th>Predicted FAKE (1)</th><th>Total</th></tr>
+  <tr><th>Actual REAL (0)</th><td><strong>50 (TN)</strong></td><td>0 (FP)</td><td>50</td></tr>
+  <tr><th>Actual FAKE (1)</th><td>12 (FN)</td><td><strong>38 (TP)</strong></td><td>50</td></tr>
+</table>
+<div class="img-container">
+  <img src="confusion_matrix.png" alt="Confusion Matrix">
+</div>
+
+<h2>4. Per-Class Performance</h2>
+<table>
+  <tr><th>Class</th><th>Sample Count</th><th>Correct</th><th>Incorrect</th><th>Recall</th><th>Precision</th></tr>
+  <tr><td>REAL</td><td>50</td><td>50</td><td>0</td><td>100.0%</td><td>80.6%</td></tr>
+  <tr><td>FAKE</td><td>50</td><td>38</td><td>12</td><td>76.0%</td><td>100.0%</td></tr>
+</table>
+
+<h2>5. Threshold Analysis</h2>
+<p>Current production decision threshold is <strong>0.5</strong>. Performance across thresholds is shown below:</p>
+<div class="img-container">
+  <img src="threshold_analysis.png" alt="Threshold Analysis">
+</div>
+
+<h2>6. Confidence Distribution & Borderline Analysis</h2>
+<div class="img-container">
+  <img src="confidence_distribution.png" alt="Confidence Distribution">
+</div>
+<p>Total borderline predictions (|p_fake - 0.50| &lt; 0.15): <strong>6</strong>.</p>
+
+<h2>7. Error & Calibration Analysis</h2>
+<p>Total misclassifications: <strong>12</strong>. False Positives: <strong>0</strong>. False Negatives: <strong>12</strong>.</p>
+<p>High-confidence errors (&ge; 90% certainty on an incorrect prediction): <strong>3</strong>.</p>
+<div class='img-container'><img src='evaluation_errors_contact_sheet.png' alt='Error Contact Sheet'></div>
+
+<h2>8. Difficult Image Categories</h2>
+<table>
+  <tr><th>Category</th><th>Samples Available</th><th>Finding</th></tr>
+  <tr><td>Multi-face scene</td><td>1 composite image</td><td>Primary face correctly isolated and analyzed.</td></tr>
+  <tr><td>Pre-cropped close-ups</td><td>100 images</td><td>Haar cascade detector missed 36% of close-up faces (triggering safety guard).</td></tr>
+  <tr><td>Low resolution / compression</td><td>0 labeled splits</td><td><em>Insufficient evaluation samples.</em></td></tr>
+  <tr><td>Profile / occluded faces</td><td>0 labeled splits</td><td><em>Insufficient evaluation samples.</em></td></tr>
+  <tr><td>Diffusion / GAN generators</td><td>0 labeled splits</td><td><em>Insufficient evaluation samples.</em></td></tr>
+</table>
+
+<h2>9. Model Limitations</h2>
+<ul>
+  <li><strong>Asymmetric sensitivity:</strong> The model is biased toward predicting REAL (100% specificity, 76% fake recall), allowing subtle deepfakes to pass as authentic.</li>
+  <li><strong>Overconfidence on false negatives:</strong> Several deepfake faces were classified as REAL with &gt; 90% confidence.</li>
+  <li><strong>Upstream dataset leakage:</strong> Exactly 2 duplicate synthetic faces exist between train and test sets in the upstream repository.</li>
+  <li><strong>Face detector sensitivity:</strong> Haar Cascade requires whole-head contextual margins and fails on tight 224x224 bounding boxes.</li>
+</ul>
+
+<h2>10. Recommendations</h2>
+<ol>
+  <li>Acquire an independent benchmark evaluation dataset (e.g. FaceForensics++ or Celeb-DF) with 1,000+ balanced samples.</li>
+  <li>Consider upgrading the Haar Cascade face detector to an SSD or RetinaFace model for tight face crop support.</li>
+  <li>Calibrate model probabilities using Platt scaling or isotonic regression to align confidence with empirical accuracy.</li>
+</ol>
+
+<hr>
+<p style="font-size:0.85em; color:#94a3b8;">CyberGuard Evaluation Report &mdash; Phase 2</p>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{
+  "evaluation_timestamp": "2026-10-07T07:09:48.270180",
+  "model_file": "cyberguard_model.keras",
+  "evaluation_status": "PRELIMINARY",
+  "caution_note": "Results are preliminary due to limited evaluation sample size (100 test images).",
+  "dataset": {
+    "total": 100,
+    "real": 50,
+    "fake": 50,
+    "integrity_status": "WARNING",
+    "exact_train_overlap": 2
+  },
+  "metrics": {
+    "accuracy": 0.88,
+    "precision": 1.0,
+    "recall": 0.76,
+    "f1": 0.8636363636363636,
+    "specificity": 1.0,
+    "balanced_accuracy": 0.88,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.24,
+    "roc_auc": 0.9588,
+    "pr_auc": 0.968611841957292
+  },
+  "confusion_matrix": {
+    "convention": "REAL = negative (0), FAKE = positive (1)",
+    "true_negative": 50,
+    "false_positive": 0,
+    "false_negative": 12,
+    "true_positive": 38,
+    "labels": {
+      "0": "REAL",
+      "1": "FAKE"
+    }
+  },
+  "per_class": {
+    "REAL": {
+      "count": 50,
+      "correct": 50,
+      "incorrect": 0,
+      "recall": 1.0,
+      "precision": 0.8064516129032258
+    },
+    "FAKE": {
+      "count": 50,
+      "correct": 38,
+      "incorrect": 12,
+      "recall": 0.76,
+      "precision": 1.0
+    }
+  },
+  "errors": {
+    "total_errors": 12,
+    "false_positives": 0,
+    "false_negatives": 12,
+    "high_confidence_errors": 3,
+    "borderline_predictions": 6
+  },
+  "face_detection_guard_behavior": {
+    "total_test_images": 100,
+    "faces_detected_count": 64,
+    "faces_missed_count": 36,
+    "note": "Haar cascade misses pre-cropped 224x224 tight faces in 36% of samples; production guard prevents false whole-image prediction."
+  }
+}

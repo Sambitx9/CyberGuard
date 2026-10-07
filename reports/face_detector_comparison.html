@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Face Detector Benchmark Comparison</title>
+<style>
+body { font-family: Segoe UI, Arial, sans-serif; background: #0a0e17; color: #e5e7eb; max-width: 880px; margin: 32px auto; padding: 0 20px; line-height: 1.55; }
+h1 { color: #00e5ff; } h2 { color: #38bdf8; border-bottom: 1px solid #1f2937; padding-bottom: 6px; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #1f2937; }
+th { background: #111827; color: #94a3b8; }
+.badge { padding: 3px 8px; border-radius: 4px; font-weight: 600; font-size: 0.85em; }
+.badge-active { background: #065f46; color: #6ee7b7; }
+.badge-bench { background: #1e3a8a; color: #93c5fd; }
+.badge-unavail { background: #374151; color: #9ca3af; }
+.box { background: #111827; border-left: 3px solid #00e5ff; padding: 12px 16px; margin: 16px 0; border-radius: 4px; }
+</style></head>
+<body>
+<h1>CYBERGUARD &mdash; FACE DETECTOR BENCHMARK</h1>
+<div class="box">
+<strong>Benchmark Finding:</strong> Current Haar Cascade achieves <strong>64.0% detection rate</strong> on pre-cropped 224x224 test images (36 missed faces safely intercepted by the face-detection guard). The multi-scale Ensemble detector raises detection rate to <strong>70.0%</strong> without new dependencies. Deep learning YuNet weights are not bundled in standard opencv-python-headless.
+</div>
+<h2>Detector Comparison Matrix</h2>
+<table>
+<tr><th>Detector</th><th>Status</th><th>Detection Rate</th><th>REAL (50)</th><th>FAKE (50)</th><th>Missed</th><th>Multi-Face Test</th></tr>
+<tr>
+<td><strong>OpenCV Haar Cascade (Default)</strong></td>
+<td><span class="badge badge-active">BENCHMARKED</span></td>
+<td>64.0%</td>
+<td>31/50</td>
+<td>33/50</td>
+<td>36</td>
+<td>2 faces found</td>
+</tr><tr>
+<td><strong>Ensemble Multi-Scale Haar Cascade (Default + Alt2)</strong></td>
+<td><span class="badge badge-active">BENCHMARKED</span></td>
+<td>71.0%</td>
+<td>35/50</td>
+<td>36/50</td>
+<td>29</td>
+<td>2 faces found</td>
+</tr><tr>
+<td><strong>OpenCV YuNet Deep Learning Face Detector</strong></td>
+<td><span class="badge badge-unavail">UNAVAILABLE</span></td>
+<td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td>
+<td><em>Weights file not bundled in base opencv-python-headless</em></td>
+</tr>
+</table>
+<h2>Production Recommendation</h2>
+<p><strong>Recommendation:</strong> Retain Haar Cascade as production default. The current pipeline's no-face guard safely handles missed detections by preventing false classifications. Transition to deep learning face detectors should be evaluated once dedicated ONNX asset downloading is configured.</p>
+</body></html>

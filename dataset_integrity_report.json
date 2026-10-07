@@ -1,0 +1,129 @@
+{
+  "summary": {
+    "total_training_images": 500,
+    "total_test_images": 102,
+    "total_images_analyzed": 602,
+    "internal_train_duplicates": 0,
+    "internal_test_duplicates": 0,
+    "exact_train_test_overlap_count": 2,
+    "perceptual_near_duplicates_count": 16,
+    "status": "WARNING"
+  },
+  "train_test_exact_matches": [
+    {
+      "test_file": "test_data/fake/fake_test_0004.jpg",
+      "train_file": "dataset/fake/fake_train_0001.jpg",
+      "sha256": "56f0d3242bac7e4dacc58385065288ae5b8d845e71e9e948390c93a0954dfdd4",
+      "type": "exact_byte_match"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0009.jpg",
+      "train_file": "dataset/fake/fake_train_0004.jpg",
+      "sha256": "d4c8ac9cdcf4f09ef533eb57e267bab52319c3a4afead0dbc0decc16e9f34459",
+      "type": "exact_byte_match"
+    }
+  ],
+  "train_test_near_matches": [
+    {
+      "test_file": "test_data/fake/fake_test_0027.jpg",
+      "train_file": "dataset/fake/fake_train_0062.jpg",
+      "hamming_distance": 0,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0042.jpg",
+      "train_file": "dataset/fake/fake_train_0178.jpg",
+      "hamming_distance": 2,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0042.jpg",
+      "train_file": "dataset/fake/fake_train_0195.jpg",
+      "hamming_distance": 2,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0042.jpg",
+      "train_file": "dataset/fake/fake_train_0206.jpg",
+      "hamming_distance": 0,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0042.jpg",
+      "train_file": "dataset/fake/fake_train_0208.jpg",
+      "hamming_distance": 1,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0042.jpg",
+      "train_file": "dataset/fake/fake_train_0229.jpg",
+      "hamming_distance": 2,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0046.jpg",
+      "train_file": "dataset/fake/fake_train_0165.jpg",
+      "hamming_distance": 0,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0046.jpg",
+      "train_file": "dataset/fake/fake_train_0168.jpg",
+      "hamming_distance": 1,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0046.jpg",
+      "train_file": "dataset/fake/fake_train_0169.jpg",
+      "hamming_distance": 2,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0046.jpg",
+      "train_file": "dataset/fake/fake_train_0184.jpg",
+      "hamming_distance": 2,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0046.jpg",
+      "train_file": "dataset/fake/fake_train_0209.jpg",
+      "hamming_distance": 2,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0046.jpg",
+      "train_file": "dataset/fake/fake_train_0213.jpg",
+      "hamming_distance": 2,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0046.jpg",
+      "train_file": "dataset/fake/fake_train_0215.jpg",
+      "hamming_distance": 2,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0046.jpg",
+      "train_file": "dataset/fake/fake_train_0222.jpg",
+      "hamming_distance": 2,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0046.jpg",
+      "train_file": "dataset/fake/fake_train_0240.jpg",
+      "hamming_distance": 2,
+      "type": "perceptual_near_duplicate"
+    },
+    {
+      "test_file": "test_data/fake/fake_test_0049.jpg",
+      "train_file": "dataset/fake/fake_train_0180.jpg",
+      "hamming_distance": 2,
+      "type": "perceptual_near_duplicate"
+    }
+  ],
+  "warnings": [
+    "2 test images are exact bit-for-bit duplicates of training set images due to upstream dataset overlap.",
+    "16 test images are perceptual near-duplicates (Hamming dist <= 2) of training set images.",
+    "Data leakage present in upstream source dataset: evaluation should flag overlapping samples and compute both raw and leakage-isolated metrics."
+  ]
+}

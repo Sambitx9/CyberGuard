@@ -1,0 +1,4 @@
+filename,ground_truth,predicted_label,fake_probability,real_probability,confidence,face_count,width,height,is_high_conf_error
+fake_test_0033.jpg,FAKE,REAL,0.06557833403348923,0.9344216659665108,93.44216659665108,0,224,224,True
+fake_test_0040.jpg,FAKE,REAL,0.013613168150186539,0.9863868318498135,98.63868318498135,0,224,224,True
+fake_test_0041.jpg,FAKE,REAL,0.07948195189237595,0.920518048107624,92.0518048107624,0,224,224,True

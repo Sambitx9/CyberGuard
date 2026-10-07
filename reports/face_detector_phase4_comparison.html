@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Face Detector Phase 4 Comparison & Downstream Impact</title>
+<style>
+body { font-family: Segoe UI, Arial, sans-serif; background: #0a0e17; color: #e5e7eb; max-width: 980px; margin: 32px auto; padding: 0 24px; line-height: 1.6; }
+h1 { color: #00e5ff; } h2 { color: #38bdf8; border-bottom: 1px solid #1f2937; padding-bottom: 6px; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #1f2937; }
+th { background: #111827; color: #94a3b8; font-size: 0.9em; }
+.box { background: #111827; border-left: 4px solid #00e5ff; padding: 14px 18px; margin: 18px 0; border-radius: 4px; }
+.highlight { color: #10b981; font-weight: 700; }
+</style></head>
+<body>
+<h1>CYBERGUARD &mdash; FACE DETECTOR BENCHMARK & DOWNSTREAM IMPACT</h1>
+<div class="box">
+<strong>Downstream Empirical Finding:</strong> Upgrading the face detector directly improves deepfake detection performance!
+When transitioning from Haar Cascade to OpenCV YuNet (DNN), <strong>missed faces drop from 36 down to 6</strong>, and full-pipeline accuracy rises from <span class="highlight">56.0% to 82.0%</span> with <strong>100% precision</strong> and <strong>72.0% recall</strong>.
+</div>
+
+<h2>Comparative Matrix Across Full Pipeline</h2>
+<table>
+<tr>
+  <th>Detector</th>
+  <th>Detection Rate</th>
+  <th>Real Faces</th>
+  <th>Fake Faces</th>
+  <th>Missed Faces</th>
+  <th>Pipeline Accuracy</th>
+  <th>Precision</th>
+  <th>Recall</th>
+  <th>F1-Score</th>
+  <th>Unsupported (No-Face)</th>
+</tr>
+<tr>
+<td><strong>Haar Cascade (Current)</strong></td>
+<td>64.0%</td>
+<td>31/50</td>
+<td>33/50</td>
+<td>36</td>
+<td><strong>56.0%</strong></td>
+<td>96.3%</td>
+<td>52.0%</td>
+<td>67.5%</td>
+<td>36</td>
+</tr><tr>
+<td><strong>Ensemble Haar</strong></td>
+<td>71.0%</td>
+<td>35/50</td>
+<td>36/50</td>
+<td>29</td>
+<td><strong>63.0%</strong></td>
+<td>96.7%</td>
+<td>58.0%</td>
+<td>72.5%</td>
+<td>29</td>
+</tr><tr>
+<td><strong>OpenCV YuNet (DNN)</strong></td>
+<td>94.0%</td>
+<td>46/50</td>
+<td>48/50</td>
+<td>6</td>
+<td><strong>82.0%</strong></td>
+<td>100.0%</td>
+<td>72.0%</td>
+<td>83.7%</td>
+<td>6</td>
+</tr>
+</table>
+
+<h2>Key Insights</h2>
+<ul>
+  <li><strong>Haar Cascade (Current):</strong> Misses 36% of close-up pre-cropped faces. Its conservative guard prevents false classifications, but drops end-to-end recall to 52.0%.</li>
+  <li><strong>Ensemble Haar:</strong> Modestly improves detection to 71.0% (+7.0% pipeline accuracy) with no additional model weights.</li>
+  <li><strong>OpenCV YuNet (DNN):</strong> Solves the close-up crop localization limitation, capturing 94.0% of faces. Deepfake pipeline accuracy increases by +26.0%.</li>
+</ul>
+
+<hr>
+<p style="font-size:0.85em; color:#94a3b8;">CyberGuard Phase 4 Engineering Report &mdash; 2026</p>
+</body></html>

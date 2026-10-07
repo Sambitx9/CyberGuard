@@ -1,0 +1,30 @@
+{
+  "dataset_used": "dataset/ held-out validation split (strictly disjoint from test_data)",
+  "calibration_samples": 100,
+  "metrics": {
+    "raw_model": {
+      "brier_score": 0.05782279466458741,
+      "ece": 0.10759955653920769,
+      "mce": 0.758523220817248
+    },
+    "platt_scaling": {
+      "brier_score": 0.03320116235718236,
+      "ece": 0.04382556109872351,
+      "mce": 0.4407166697073225,
+      "improvement_brier": 0.02462163230740505,
+      "improvement_ece": 0.06377399544048418
+    },
+    "isotonic_regression": {
+      "brier_score": 0.024166666666666666,
+      "ece": 0.0,
+      "mce": 0.0,
+      "improvement_brier": 0.03365612799792074,
+      "improvement_ece": 0.10759955653920769
+    }
+  },
+  "recommendation": {
+    "selected_calibrator": "Platt Scaling (Logistic Calibration)",
+    "rationale": "Platt scaling produces continuous, monotonic probability adjustments with lower risk of overfitting on small validation splits than piecewise isotonic regression.",
+    "production_status": "VALIDATED FOR PROBABILITY DISPLAY; Classifier decision threshold preserved at 0.50"
+  }
+}

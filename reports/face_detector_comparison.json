@@ -1,0 +1,42 @@
+{
+  "summary": {
+    "production_detector": "OpenCV Haar Cascade (Default)",
+    "production_recommendation": "Retain Haar Cascade for production MVP to preserve verified safety guards; Ensemble Haar increases detection from 64% to 70%; consider YuNet ONNX weights integration in Phase 4.",
+    "evaluation_sample_size": 100
+  },
+  "detectors": {
+    "OpenCV Haar Cascade (Default)": {
+      "detector_name": "OpenCV Haar Cascade (Default)",
+      "status": "BENCHMARKED",
+      "is_available": true,
+      "detection_rate_overall": 0.64,
+      "detected_real": 31,
+      "detected_fake": 33,
+      "missed_faces": 36,
+      "multi_face_test_count": 2,
+      "availability_note": "Active in production"
+    },
+    "Ensemble Multi-Scale Haar Cascade (Default + Alt2)": {
+      "detector_name": "Ensemble Multi-Scale Haar Cascade (Default + Alt2)",
+      "status": "BENCHMARKED",
+      "is_available": true,
+      "detection_rate_overall": 0.71,
+      "detected_real": 35,
+      "detected_fake": 36,
+      "missed_faces": 29,
+      "multi_face_test_count": 2,
+      "availability_note": "Available locally (no new dependencies)"
+    },
+    "OpenCV YuNet Deep Learning Face Detector": {
+      "detector_name": "OpenCV YuNet Deep Learning Face Detector",
+      "status": "UNAVAILABLE",
+      "is_available": false,
+      "detection_rate_overall": null,
+      "detected_real": null,
+      "detected_fake": null,
+      "missed_faces": null,
+      "multi_face_test_count": null,
+      "availability_note": "Weights file not bundled in base opencv-python-headless"
+    }
+  }
+}

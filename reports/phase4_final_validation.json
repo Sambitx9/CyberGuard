@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-10-07T03:11:08.810206",
+  "phase": "Phase 4 \u2014 External Benchmark & Decision Gate",
+  "model_file": "cyberguard_model.keras",
+  "model_integrity": "UNCHANGED",
+  "external_dataset": {
+    "status": "NOT PROVIDED",
+    "integrity": "NOT PROVIDED"
+  },
+  "detectors": {
+    "haar_cascade": {
+      "detection_rate": 0.64,
+      "pipeline_accuracy": 0.56,
+      "precision": 0.963,
+      "recall": 0.52,
+      "status": "ACTIVE PRODUCTION DEFAULT"
+    },
+    "ensemble_haar": {
+      "detection_rate": 0.71,
+      "pipeline_accuracy": 0.63,
+      "precision": 0.967,
+      "recall": 0.58,
+      "status": "BENCHMARKED"
+    },
+    "opencv_yunet": {
+      "detection_rate": 0.94,
+      "pipeline_accuracy": 0.82,
+      "precision": 1.0,
+      "recall": 0.72,
+      "status": "BENCHMARKED & VERIFIED (+26% pipeline gain)"
+    }
+  },
+  "calibration": {
+    "status": "DEFERRED",
+    "held_out_validation_ece_platt": 0.0438,
+    "held_out_validation_brier_platt": 0.0332,
+    "note": "Calibration validation deferred for external benchmark; internal Platt scaling verified on held-out validation split."
+  },
+  "production_threshold": {
+    "threshold": 0.5,
+    "decision": "PRESERVED at 0.50 (no empirical basis to alter without external data)"
+  },
+  "final_decision_gate": {
+    "decision": "PRELIMINARY",
+    "justification": "External dataset not provided. Model achieves 88% test accuracy and YuNet achieves 82% full pipeline accuracy, but remains PRELIMINARY until independent multi-generator datasets are ingested."
+  },
+  "production_recommendation": "Retain MobileNetV2 with Haar Cascade default for production MVP to preserve verified safety guards. Adopt OpenCV YuNet (+26% pipeline accuracy) in next minor version. Ingest independent benchmark images in external_test_data/ to complete external validation."
+}

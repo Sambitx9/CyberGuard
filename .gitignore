@@ -1,0 +1,41 @@
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache & bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Environment variables, credentials, and secrets
+.env
+.env.*
+*.key
+*.pem
+*.token
+
+# Datasets & External Benchmarks
+external_test_data/
+dataset_multidomain/
+dataset/real/*
+dataset/fake/*
+!dataset/real/.gitkeep
+!dataset/fake/.gitkeep
+
+# Models
+# App requires the trained cyberguard_model.keras, YuNet ONNX, and calibration weights
+model/*.keras
+!model/cyberguard_model.keras
+model/cyberguard_model_baseline*.keras
+model/cyberguard_model_exp*.keras
+model/cyberguard_model_phase*.keras
+
+# Logs & Temporary Files
+*.log
+*.tmp
+scratch/
+.tempmediaStorage/

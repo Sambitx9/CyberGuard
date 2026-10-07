@@ -1,0 +1,65 @@
+{
+  "evaluation_size": 100,
+  "detectors": {
+    "Haar Cascade (Current)": {
+      "detection_rate": 0.64,
+      "detected_real": 31,
+      "detected_fake": 33,
+      "missed_faces": 36,
+      "detected_faces_accuracy": 0.875,
+      "pipeline_accuracy": 0.56,
+      "precision": 0.963,
+      "recall": 0.52,
+      "f1": 0.675,
+      "tp": 26,
+      "tn": 30,
+      "fp": 1,
+      "fn": 7,
+      "unsupported_no_face": 36,
+      "latency_ms_per_image": 8.5
+    },
+    "Ensemble Haar": {
+      "detection_rate": 0.71,
+      "detected_real": 35,
+      "detected_fake": 36,
+      "missed_faces": 29,
+      "detected_faces_accuracy": 0.887,
+      "pipeline_accuracy": 0.63,
+      "precision": 0.967,
+      "recall": 0.58,
+      "f1": 0.725,
+      "tp": 29,
+      "tn": 34,
+      "fp": 1,
+      "fn": 7,
+      "unsupported_no_face": 29,
+      "latency_ms_per_image": 14.2
+    },
+    "OpenCV YuNet (DNN)": {
+      "detection_rate": 0.94,
+      "detected_real": 46,
+      "detected_fake": 48,
+      "missed_faces": 6,
+      "detected_faces_accuracy": 0.872,
+      "pipeline_accuracy": 0.82,
+      "precision": 1.0,
+      "recall": 0.72,
+      "f1": 0.837,
+      "tp": 36,
+      "tn": 46,
+      "fp": 0,
+      "fn": 12,
+      "unsupported_no_face": 6,
+      "latency_ms_per_image": 11.8
+    }
+  },
+  "downstream_impact_analysis": {
+    "finding": "Face detection localization is the single largest bottleneck in the end-to-end pipeline.",
+    "haar_vs_yunet_pipeline_gain": "+26.0% overall pipeline accuracy (56.0% -> 82.0%) and +20.0% deepfake recall (52.0% -> 72.0%)",
+    "false_positive_reduction": "YuNet achieved 0 False Positives on authentic faces (100% precision vs 96.3% with Haar)."
+  },
+  "recommendation": {
+    "candidate": "OpenCV YuNet (DNN)",
+    "recommendation_text": "Adopt YuNet as the primary face detector backend in future production updates, while keeping Haar Cascade available as a lightweight zero-weight fallback."
+  }
+}

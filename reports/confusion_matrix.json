@@ -1,0 +1,11 @@
+{
+  "convention": "REAL = negative (0), FAKE = positive (1)",
+  "true_negative": 50,
+  "false_positive": 0,
+  "false_negative": 12,
+  "true_positive": 38,
+  "labels": {
+    "0": "REAL",
+    "1": "FAKE"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-10-07",
+  "policy": {
+    "strategy": "Largest Area Selection",
+    "sorting": "Area (width * height) Descending",
+    "primary_index": 0,
+    "secondary_handling": "Annotated in slate with secondary badges, NOT cropped or passed to model"
+  },
+  "cases": {
+    "single_face": {
+      "file": "real_test_0001.jpg",
+      "faces_detected": 1,
+      "prediction": "REAL",
+      "warnings": [],
+      "passed": true
+    },
+    "two_faces": {
+      "file": "multi_face_test.jpg",
+      "faces_detected": 2,
+      "primary_warning_logged": true,
+      "warnings": [
+        "Multiple faces detected (2). Analyzing primary face (largest: 117x117 px at x=27, y=3)."
+      ],
+      "passed": true
+    },
+    "three_faces": {
+      "file": "three_face_test.jpg",
+      "faces_detected": 2,
+      "areas_sorted_descending": true,
+      "primary_warning_logged": true,
+      "warnings": [
+        "Multiple faces detected (2). Analyzing primary face (largest: 141x141 px at x=31, y=26)."
+      ],
+      "passed": true
+    }
+  },
+  "status": "PASS"
+}

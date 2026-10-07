@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-10-07 08:02:11",
+  "status": "PASS",
+  "external_dataset_status": "AVAILABLE",
+  "validation_status": "READY_FOR_EVALUATION",
+  "dataset_name": "Celeb-DF v2 Image Benchmark",
+  "total_images": 200,
+  "real_count": 100,
+  "fake_count": 100,
+  "leakage_collisions": 0,
+  "leakage_rate": 0.0,
+  "image_validity": "100% verified decodable"
+}
